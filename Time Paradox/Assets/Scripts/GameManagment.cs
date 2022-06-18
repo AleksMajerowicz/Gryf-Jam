@@ -6,53 +6,35 @@ public class GameManagment : MonoBehaviour
 {
     [SerializeField] Player player;
     [SerializeField] Rigidbody [] Asteroids;
-    public List<Rigidbody> dynamicList = new List<Rigidbody>();//W niej bêda aktualne istniejace Asteroide,co pzowoli na przywrócenie ich zapisanie ich pozycji
+    public List<Rigidbody> asteroidList = new List<Rigidbody>();//W niej bêda aktualne istniejace Asteroide,co pzowoli na przywrócenie ich zapisanie ich pozycji
 
     [SerializeField]float timeGenerate,timeDelete,timeToDelete, timeToGenerate;
     // Start is called before the first frame update
     void Start()
     {
-        /*for(int i = 0; i < 20; i++)
+        asteroidList.Add(Instantiate(Asteroids[Random.Range(0, Asteroids.Length)], new Vector3(Random.Range(-3f, 3f), Random.Range(-3f, 3f),20), new Quaternion(0, 0, 0, 1)));
+        for (int i = 0; i < 100; i++)
         {
-            Instantiate(Asteroids[Random.Range(0, Asteroids.Length)], new Vector3(Random.Range(-1.9f, 1.9f), Random.Range(-1.9f, 1.9f), player.transform.position.z + 20), new Quaternion(0, 0, 0, 1));
-        }*/
+            GenerateAsteroids(i);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        GenerateAsteroids();
-        DeleteAsteroids();
-
-        RegeneratorTimerReverseTime();
-        RegeneratorTimerGoToTheOtherDimension();
+        RegeneratorTimerReverseTime();//Regeneruje Punkty Umiejêtnoœci Cofania sie w czasie o dan¹ iloœæ sekund
+        RegeneratorTimerGoToTheOtherDimension();//Regeneruje punkty umiejenoœci bycia w innym wymiarzê
     }
 
-    void GenerateAsteroids()
+    void GenerateAsteroids(int index)
     {
-        if (timeGenerate >= timeToGenerate)
-        {
-            dynamicList.Add(Instantiate(Asteroids[Random.Range(0, Asteroids.Length)], new Vector3(Random.Range(-1.9f, 1.9f), Random.Range(-1.9f, 1.9f), player.transform.position.z + 20), new Quaternion(0, 0, 0, 1)));
-            timeGenerate = 0;
-        }
-        timeGenerate += Time.deltaTime;
-    }
+        asteroidList.Add(Instantiate(Asteroids[Random.Range(0, Asteroids.Length)], new Vector3(Random.Range(-3, 3), Random.Range(-3, 3), asteroidList[index].transform.position.z + 10), new Quaternion(0, 0, 0, 1)));
 
-    void DeleteAsteroids()
-    {
-        if (timeDelete >= timeToDelete)
-        {
-            Destroy(dynamicList[0].gameObject);
-            dynamicList.Remove(dynamicList[0]);
-            timeDelete = 0;
-            player.lastLive = player.live;
-        }
-        timeDelete += Time.deltaTime;
     }
 
     void RegeneratorTimerReverseTime()
     {
-        if (player.timeReverseTime >= player.timeToRegenerationReverseTime && player.pointReverserTime >= 10)
+        if (player.timeReverseTime >= player.timeToRegenerationReverseTime && player.pointReverserTime < 10)
         {
             player.pointReverserTime += 1;
             player.timeReverseTime = 0;
@@ -60,17 +42,11 @@ public class GameManagment : MonoBehaviour
         player.timeReverseTime += Time.deltaTime;
     }
 
-    public void TimeRevers(int backTime)
-    {
-        timeDelete -= backTime;
-        timeGenerate -= backTime;
-    }
-
     void RegeneratorTimerGoToTheOtherDimension()
     {
-        if (player.timeGoOtherDimension >= player.timeToregenerationGoOtherDimension && player.pointGoerOtherDimension >= 10)
+        if (player.timeGoOtherDimension >= player.timeToregenerationGoOtherDimension && player.pointToBeOtherDimension < 10)
         {
-            player.pointGoerOtherDimension += 1;
+            player.pointToBeOtherDimension += 1;
             player.timeGoOtherDimension = 0;
         }
         player.timeGoOtherDimension += Time.deltaTime;

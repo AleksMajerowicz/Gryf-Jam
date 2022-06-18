@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 394855373}
   - component: {fileID: 394855372}
   - component: {fileID: 394855371}
+  - component: {fileID: 394855375}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -224,6 +225,42 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &394855375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394855370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fcdf34496606014082e6c74bb4d2a21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 799834779}
+  playerLiveBar: {fileID: 0}
+  pointReveserTime:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  pointToBeTheOtherDimension:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &669025964
 GameObject:
   m_ObjectHideFlags: 0
@@ -257,7 +294,7 @@ MonoBehaviour:
   Asteroids:
   - {fileID: 8134470150600452222, guid: e46b44c6315448f4eb27005e541c6265, type: 3}
   - {fileID: -1529044928777905927, guid: 2e5c8a585b24154408f0ef1171fb9e2a, type: 3}
-  dynamicList: []
+  asteroidList: []
   timeGenerate: 0
   timeDelete: 0
   timeToDelete: 5
@@ -386,8 +423,9 @@ GameObject:
   - component: {fileID: 799834779}
   - component: {fileID: 799834781}
   - component: {fileID: 799834782}
+  - component: {fileID: 799834783}
   m_Layer: 0
-  m_Name: Test
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -485,19 +523,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backTime: {fileID: 669025965}
+  playerAnimations: {fileID: 799834783}
   live: 0
   maxLive: 0
-  lastLive: 0
+  backTimes: 1
+  lastPosition: []
+  originalBullet: {fileID: -7668741435604538075, guid: f8c48918f5a4c21498bd24b2d222e734, type: 3}
+  bullets: {fileID: 0}
+  coolDown: 0
+  timeEndCoolDown: 5
   reversTime: 0
   pointReverserTime: 0
   timeReverseTime: 0
-  timeToRegenerationReverseTime: 0
+  timeToRegenerationReverseTime: 2.5
   isOtherDimension: 0
-  pointGoerOtherDimension: 0
+  pointToBeOtherDimension: 0
   timeGoOtherDimension: 0
-  timeToregenerationGoOtherDimension: 0
-  time: 0
+  timeToregenerationGoOtherDimension: 2.5
   timeInOtherDimension: 0
+  timeToEndInOtherDimension: 0
+  isReversTime: 0
+  pointBeReversTime: 0
+  timeBeReversTime: 0
+  timeToBeReversTime: 5
 --- !u!54 &799834781
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -527,6 +575,26 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!95 &799834783
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 799834773}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0e509a3360941564391d4a7cdb24c995, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
