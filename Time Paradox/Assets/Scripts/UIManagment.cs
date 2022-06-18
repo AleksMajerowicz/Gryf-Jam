@@ -9,6 +9,7 @@ public class UIManagment : MonoBehaviour
     [SerializeField] Image playerLiveBar;
     [SerializeField] Image[] pointReveserTime;
     [SerializeField] Image[] pointToBeTheOtherDimension;
+    [SerializeField] Image[] pointToBePast;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,9 +18,11 @@ public class UIManagment : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //playerLiveBar.fillAmount = player.live / player.maxLive;
+        playerLiveBar.fillAmount = player.live / player.maxLive;
+        
         SetPointsReversTime();
         SetPointsToBeOtherDiminsions();
+        SetPointsToBePast();
 
     }
 
@@ -51,5 +54,35 @@ public class UIManagment : MonoBehaviour
         {
             pointToBeTheOtherDimension[player.pointToBeOtherDimension - 1].gameObject.SetActive(true);
         }
+    }
+
+    void SetPointsToBePast()
+    {
+        if(player.pointBeReversTime == 0)
+        {
+            for(int i = 0; i < pointToBePast.Length; i++)
+            {
+                pointToBePast[i].gameObject.SetActive(false);
+            }
+        }
+        else if(player.pointBeReversTime > 0 && player.pointBeReversTime <= pointToBePast.Length)
+        {
+            pointToBePast[player.pointBeReversTime - 1].gameObject.SetActive(true);
+        }
+    }
+
+    public int ReturnListReverserTime()
+    {
+        return pointReveserTime.Length;
+    }
+
+    public int ReturnListToBeTheOrderDimision()
+    {
+        return pointToBeTheOtherDimension.Length;
+    }
+
+    public int ReturnListBePast()
+    {
+        return pointToBePast.Length;
     }
 }

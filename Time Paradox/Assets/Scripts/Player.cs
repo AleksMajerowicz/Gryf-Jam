@@ -61,16 +61,22 @@ public class Player : MonoBehaviour
         }
         coolDown += Time.deltaTime;
 
-        if (Input.GetKeyDown(KeyCode.T) && pointReverserTime == 10 && isOtherDimension == false && isReversTime == false)
+        if (Input.GetKeyDown(KeyCode.T) && pointReverserTime == 6 && isOtherDimension == false && isReversTime == false)
         {
             playerAnimations.SetBool("reverserTime", true);
             pointReverserTime = 0;
         }
-        if(Input.GetKeyDown(KeyCode.R) && pointToBeOtherDimension == 10 && reversTime == false && isReversTime == false)
+        if(Input.GetKeyDown(KeyCode.R) && pointToBeOtherDimension == 6 && reversTime == false && isReversTime == false)
         {
             playerAnimations.SetBool("BeInOtherDimension", true);
             pointToBeOtherDimension = 0;
         }
+        if(Input.GetKeyDown(KeyCode.U) && pointBeReversTime == 10 && reversTime == false && isOtherDimension == false)
+        {
+            playerAnimations.SetBool("BePast", true);
+            pointBeReversTime = 0;
+        }
+
         //To pozwala na dynamiczne cofniecie sie w czasie,bez...niedoci¹gniêæ
         SaveLastPosition();//Zapisuje ostatni¹ pozycje w danym czasie
         TimesReverses();//Cofa w czasie o dan¹ iloœc sekund.Jest na zewn¹trz,a nie w ifie ze wzgledu na unikniecia kolizji,¿e...cofnie nie w tym czasie co trzeba(przez czas animacji)
@@ -78,6 +84,10 @@ public class Player : MonoBehaviour
         if(isOtherDimension)//Je¿eli jest w innym wymarze
         {
             TimeInOtherDimension();//To sprawdza ile w nim jest
+        }
+        else if(isReversTime)
+        {
+
         }
     }
 
@@ -124,7 +134,7 @@ public class Player : MonoBehaviour
         {
             if(other.CompareTag("Asteroid"))
             {
-                live = 0;
+                live -= 50;
             }
             if(other.CompareTag("gogga"))
             {
